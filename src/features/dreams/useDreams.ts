@@ -19,7 +19,9 @@ export function useDreams(filterValueId?: string) {
         const dreamIds = links.map((l) => l.dreamId);
         dreams = await db.dreams.where("id").anyOf(dreamIds).toArray();
       } else {
-        dreams = await db.dreams.where("archived").equals(0).toArray();
+        dreams = await db.dreams
+          .filter((d) => d.archived === false)
+          .toArray();
       }
 
       const allLinks = await db.dreamValues.toArray();
