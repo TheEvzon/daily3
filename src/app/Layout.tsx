@@ -7,6 +7,7 @@ import {
   List,
   Repeat,
 } from "lucide-react";
+import { PwaInstallBanner } from "@/shared/ui/pwa-install-banner";
 
 const navItems = [
   { to: "/", icon: CalendarCheck, label: "Today" },
@@ -20,6 +21,7 @@ const navItems = [
 export function Layout() {
   return (
     <div className="flex min-h-dvh flex-col bg-background">
+      <PwaInstallBanner />
       <main className="flex-1 overflow-y-auto pb-20">
         <Outlet />
       </main>
