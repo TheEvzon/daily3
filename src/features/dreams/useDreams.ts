@@ -38,23 +38,17 @@ export function useDreams(filterValueId?: string) {
 }
 
 export function useDream(id: string | undefined) {
-  return useLiveQuery(
-    async () => {
-      if (!id) return undefined;
-      const dream = await db.dreams.get(id);
-      if (!dream) return undefined;
-      const links = await db.dreamValues
-        .where("dreamId")
-        .equals(id)
-        .toArray();
-      const values = await db.values
-        .where("id")
-        .anyOf(links.map((l) => l.valueId))
-        .toArray();
-      return { ...dream, values } as DreamWithValues;
-    },
-    [id],
-  );
+  return useLiveQuery(async () => {
+    if (!id) return undefined;
+    const dream = await db.dreams.get(id);
+    if (!dream) return undefined;
+    const links = await db.dreamValues.where("dreamId").equals(id).toArray();
+    const values = await db.values
+      .where("id")
+      .anyOf(links.map((l) => l.valueId))
+      .toArray();
+    return { ...dream, values } as DreamWithValues;
+  }, [id]);
 }
 
 export async function createDream(

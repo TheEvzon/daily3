@@ -40,9 +40,7 @@ export function HabitsSection() {
             key={habit.id}
             className="flex items-center justify-between rounded-md bg-muted/50 px-3 py-2"
           >
-            <span className="text-sm text-muted-foreground">
-              {habit.title}
-            </span>
+            <span className="text-sm text-muted-foreground">{habit.title}</span>
             <div className="flex gap-1">
               {habit.values.map((v) => (
                 <ValueBadge key={v.id} value={v} />

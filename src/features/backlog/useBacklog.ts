@@ -142,9 +142,7 @@ async function enrichBacklogItems(
   return items.map((item) => {
     const goal = item.goalId ? goalMap.get(item.goalId) : undefined;
     const dream = goal ? dreamMap.get(goal.dreamId) : undefined;
-    const links = dream
-      ? dreamLinks.filter((l) => l.dreamId === dream.id)
-      : [];
+    const links = dream ? dreamLinks.filter((l) => l.dreamId === dream.id) : [];
     const values = links
       .map((l) => valueMap.get(l.valueId))
       .filter((v): v is Value => v !== undefined);
@@ -183,15 +181,8 @@ export async function toggleBacklogItemComplete(id: string): Promise<void> {
 }
 
 export async function deleteBacklogItem(id: string): Promise<void> {
-  await db.transaction(
-    "rw",
-    [db.backlogItems, db.daily3Entries],
-    async () => {
-      await db.daily3Entries
-        .where("backlogItemId")
-        .equals(id)
-        .delete();
-      await db.backlogItems.delete(id);
-    },
-  );
+  await db.transaction("rw", [db.backlogItems, db.daily3Entries], async () => {
+    await db.daily3Entries.where("backlogItemId").equals(id).delete();
+    await db.backlogItems.delete(id);
+  });
 }

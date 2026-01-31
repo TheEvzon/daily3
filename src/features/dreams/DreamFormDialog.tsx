@@ -14,7 +14,11 @@ import type { DreamWithValues } from "./useDreams";
 interface DreamFormDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onSubmit: (data: { title: string; description: string; valueIds: string[] }) => void;
+  onSubmit: (data: {
+    title: string;
+    description: string;
+    valueIds: string[];
+  }) => void;
   initial?: DreamWithValues;
 }
 
@@ -41,7 +45,11 @@ export function DreamFormDialog({
 
 interface DreamFormProps {
   initial?: DreamWithValues;
-  onSubmit: (data: { title: string; description: string; valueIds: string[] }) => void;
+  onSubmit: (data: {
+    title: string;
+    description: string;
+    valueIds: string[];
+  }) => void;
   onCancel: () => void;
 }
 

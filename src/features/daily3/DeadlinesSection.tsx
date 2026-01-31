@@ -1,5 +1,8 @@
 import { AlertTriangle, Check } from "lucide-react";
-import { useDeadlinesWithDays, toggleBacklogItemComplete } from "@/features/backlog/useBacklog";
+import {
+  useDeadlinesWithDays,
+  toggleBacklogItemComplete,
+} from "@/features/backlog/useBacklog";
 import { cn } from "@/shared/lib/utils";
 
 export function DeadlinesSection() {

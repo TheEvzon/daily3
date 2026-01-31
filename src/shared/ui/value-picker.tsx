@@ -40,14 +40,13 @@ export function ValuePicker({ selected, onChange }: ValuePickerProps) {
                 ? "border-transparent font-medium text-white"
                 : "border-border text-muted-foreground hover:border-foreground/30",
             )}
-            style={
-              isSelected
-                ? { backgroundColor: value.color }
-                : undefined
-            }
+            style={isSelected ? { backgroundColor: value.color } : undefined}
           >
             <span
-              className={cn("h-2 w-2 rounded-full", !isSelected && "opacity-50")}
+              className={cn(
+                "h-2 w-2 rounded-full",
+                !isSelected && "opacity-50",
+              )}
               style={{ backgroundColor: isSelected ? "white" : value.color }}
             />
             {value.name}

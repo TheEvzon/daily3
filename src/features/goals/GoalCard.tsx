@@ -25,8 +25,7 @@ export function GoalCard({
   onToggleComplete,
   onDelete,
 }: GoalCardProps) {
-  const isOverdue =
-    !goal.completed && new Date(goal.targetDate) < new Date();
+  const isOverdue = !goal.completed && new Date(goal.targetDate) < new Date();
 
   return (
     <div
@@ -41,12 +40,7 @@ export function GoalCard({
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
-          <p
-            className={cn(
-              "font-medium",
-              goal.completed && "line-through",
-            )}
-          >
+          <p className={cn("font-medium", goal.completed && "line-through")}>
             {goal.title}
           </p>
           {goal.dream && (
@@ -75,10 +69,7 @@ export function GoalCard({
           <Button
             variant="ghost"
             size="icon"
-            className={cn(
-              "h-8 w-8",
-              goal.completed && "text-green-600",
-            )}
+            className={cn("h-8 w-8", goal.completed && "text-green-600")}
             onClick={() => onToggleComplete(goal.id)}
             title={goal.completed ? "Mark incomplete" : "Mark complete"}
           >

@@ -15,7 +15,11 @@ import type { Value } from "@/types";
 interface ValueFormDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onSubmit: (data: { name: string; description: string; color: string }) => void;
+  onSubmit: (data: {
+    name: string;
+    description: string;
+    color: string;
+  }) => void;
   initial?: Value;
 }
 
@@ -42,14 +46,20 @@ export function ValueFormDialog({
 
 interface ValueFormProps {
   initial?: Value;
-  onSubmit: (data: { name: string; description: string; color: string }) => void;
+  onSubmit: (data: {
+    name: string;
+    description: string;
+    color: string;
+  }) => void;
   onCancel: () => void;
 }
 
 function ValueForm({ initial, onSubmit, onCancel }: ValueFormProps) {
   const [name, setName] = useState(initial?.name ?? "");
   const [description, setDescription] = useState(initial?.description ?? "");
-  const [color, setColor] = useState<string>(initial?.color ?? VALUE_COLORS[0].hex);
+  const [color, setColor] = useState<string>(
+    initial?.color ?? VALUE_COLORS[0].hex,
+  );
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();

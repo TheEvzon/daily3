@@ -53,10 +53,7 @@ export function DreamsPage() {
 
   return (
     <div className="mx-auto max-w-lg pb-6">
-      <PageHeader
-        title="Dreams"
-        description="Your life-level aspirations."
-      >
+      <PageHeader title="Dreams" description="Your life-level aspirations.">
         <Button size="sm" onClick={handleAdd}>
           <Plus className="mr-1 h-4 w-4" />
           Add

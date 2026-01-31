@@ -56,10 +56,7 @@ export function useDaily3(date?: string) {
 
 export async function addToDaily3(backlogItemId: string): Promise<void> {
   const today = todayString();
-  const existing = await db.daily3Entries
-    .where("date")
-    .equals(today)
-    .toArray();
+  const existing = await db.daily3Entries.where("date").equals(today).toArray();
 
   // Check if already added today
   if (existing.some((e) => e.backlogItemId === backlogItemId)) return;
@@ -84,19 +81,15 @@ export async function toggleDaily3Complete(entryId: string): Promise<void> {
   if (!entry) return;
 
   const nowCompleted = !entry.completed;
-  await db.transaction(
-    "rw",
-    [db.daily3Entries, db.backlogItems],
-    async () => {
-      await db.daily3Entries.update(entryId, {
-        completed: nowCompleted,
-        completedAt: nowCompleted ? new Date() : null,
-      });
-      // Sync backlog item completion state
-      await db.backlogItems.update(entry.backlogItemId, {
-        completed: nowCompleted,
-        completedAt: nowCompleted ? new Date() : null,
-      });
-    },
-  );
+  await db.transaction("rw", [db.daily3Entries, db.backlogItems], async () => {
+    await db.daily3Entries.update(entryId, {
+      completed: nowCompleted,
+      completedAt: nowCompleted ? new Date() : null,
+    });
+    // Sync backlog item completion state
+    await db.backlogItems.update(entry.backlogItemId, {
+      completed: nowCompleted,
+      completedAt: nowCompleted ? new Date() : null,
+    });
+  });
 }

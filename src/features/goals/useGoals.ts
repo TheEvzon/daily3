@@ -13,10 +13,7 @@ export function useGoals(filterDreamId?: string) {
     useLiveQuery(async () => {
       let goals: Goal[];
       if (filterDreamId) {
-        goals = await db.goals
-          .where("dreamId")
-          .equals(filterDreamId)
-          .toArray();
+        goals = await db.goals.where("dreamId").equals(filterDreamId).toArray();
       } else {
         goals = await db.goals.toArray();
       }
@@ -40,23 +37,20 @@ export function useGoals(filterDreamId?: string) {
 }
 
 export function useGoal(id: string | undefined) {
-  return useLiveQuery(
-    async () => {
-      if (!id) return undefined;
-      const goal = await db.goals.get(id);
-      if (!goal) return undefined;
-      const dream = await db.dreams.get(goal.dreamId);
-      const links = dream
-        ? await db.dreamValues.where("dreamId").equals(dream.id).toArray()
-        : [];
-      const values = await db.values
-        .where("id")
-        .anyOf(links.map((l) => l.valueId))
-        .toArray();
-      return { ...goal, dream, values } as GoalWithCascade;
-    },
-    [id],
-  );
+  return useLiveQuery(async () => {
+    if (!id) return undefined;
+    const goal = await db.goals.get(id);
+    if (!goal) return undefined;
+    const dream = await db.dreams.get(goal.dreamId);
+    const links = dream
+      ? await db.dreamValues.where("dreamId").equals(dream.id).toArray()
+      : [];
+    const values = await db.values
+      .where("id")
+      .anyOf(links.map((l) => l.valueId))
+      .toArray();
+    return { ...goal, dream, values } as GoalWithCascade;
+  }, [id]);
 }
 
 export async function createGoal(

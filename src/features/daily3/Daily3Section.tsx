@@ -2,11 +2,7 @@ import { Check, X } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import { ValueBadge } from "@/shared/ui/value-badge";
 import { cn } from "@/shared/lib/utils";
-import {
-  useDaily3,
-  toggleDaily3Complete,
-  removeFromDaily3,
-} from "./useDaily3";
+import { useDaily3, toggleDaily3Complete, removeFromDaily3 } from "./useDaily3";
 import type { Daily3EntryWithCascade } from "./useDaily3";
 
 interface Daily3SectionProps {
@@ -75,12 +71,7 @@ function Daily3Card({ entry }: { entry: Daily3EntryWithCascade }) {
         </button>
 
         <div className="min-w-0 flex-1">
-          <p
-            className={cn(
-              "font-medium",
-              entry.completed && "line-through",
-            )}
-          >
+          <p className={cn("font-medium", entry.completed && "line-through")}>
             {entry.backlogItem.title}
           </p>
 

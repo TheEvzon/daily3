@@ -22,9 +22,7 @@ export function QuickCaptureSheet({
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="bottom">
-        {open && (
-          <QuickCaptureForm onClose={() => onOpenChange(false)} />
-        )}
+        {open && <QuickCaptureForm onClose={() => onOpenChange(false)} />}
       </SheetContent>
     </Sheet>
   );

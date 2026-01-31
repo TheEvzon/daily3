@@ -15,7 +15,10 @@ export function PageHeader({
 }: PageHeaderProps) {
   return (
     <div
-      className={cn("flex items-start justify-between gap-4 px-4 pt-6", className)}
+      className={cn(
+        "flex items-start justify-between gap-4 px-4 pt-6",
+        className,
+      )}
     >
       <div>
         <h1 className="text-2xl font-bold">{title}</h1>
